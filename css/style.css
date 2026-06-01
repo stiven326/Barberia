@@ -9,6 +9,35 @@
 body{
     background:#111;
     color:white;
+    overflow-x:hidden;
+}
+
+.loader{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:#111;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+}
+
+.spinner{
+    width:60px;
+    height:60px;
+    border:5px solid #333;
+    border-top:5px solid #d4a373;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    100%{
+        transform:rotate(360deg);
+    }
+
 }
 
 .navbar{
@@ -17,33 +46,40 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:20px 10%;
-    background:#1c1c1c;
     position:fixed;
     top:0;
     z-index:1000;
+    transition:0.4s;
+}
+
+.navbar-scroll{
+    background:#000;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
 }
 
 .logo{
-    font-size:24px;
+    font-size:28px;
     font-weight:700;
     color:#d4a373;
 }
 
 .nav-links{
     display:flex;
-    gap:20px;
+    gap:25px;
     list-style:none;
 }
 
 .nav-links a{
     text-decoration:none;
     color:white;
+    font-weight:500;
     transition:0.3s;
 }
 
 .nav-links a:hover{
     color:#d4a373;
 }
+
 
 .hero{
     height:100vh;
@@ -54,7 +90,6 @@ body{
     justify-content:center;
     align-items:center;
     position:relative;
-    text-align:center;
 }
 
 .overlay{
@@ -67,27 +102,67 @@ body{
 .hero-content{
     position:relative;
     z-index:10;
+    text-align:center;
+    padding:20px;
 }
 
 .hero-content h1{
-    font-size:70px;
+    font-size:75px;
     color:#d4a373;
+    margin-bottom:20px;
 }
 
 .hero-content p{
-    margin:20px 0;
+    font-size:22px;
     color:#ddd;
-    font-size:20px;
+    margin-bottom:30px;
 }
 
 .btn{
     display:inline-block;
-    padding:15px 30px;
+    padding:15px 35px;
     background:#d4a373;
     color:black;
     text-decoration:none;
     border-radius:10px;
     font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:60px 10%;
+    background:#181818;
+}
+
+.stat{
+    background:#1c1c1c;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.stat:hover{
+    transform:translateY(-10px);
+}
+
+.stat h2{
+    font-size:50px;
+    color:#d4a373;
+    margin-bottom:10px;
+}
+
+.stat p{
+    color:#ccc;
+    font-size:18px;
 }
 
 .section{
@@ -96,55 +171,69 @@ body{
 
 .section-title{
     text-align:center;
-    margin-bottom:50px;
+    font-size:45px;
+    margin-bottom:60px;
     color:#d4a373;
-    font-size:40px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
 }
 
 .card{
     background:#1c1c1c;
-    padding:30px;
+    padding:35px;
     border-radius:20px;
     text-align:center;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }
 
 .card h3{
     color:#d4a373;
     margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    color:#ccc;
+    line-height:1.7;
 }
 
 .card span{
     display:block;
-    margin-top:15px;
-    font-size:24px;
+    margin-top:20px;
+    font-size:28px;
     font-weight:bold;
+    color:#fff;
 }
 
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:20px;
 }
 
 .gallery img{
     width:100%;
-    height:300px;
+    height:350px;
     object-fit:cover;
     border-radius:20px;
-    transition:0.3s;
+    transition:0.4s;
 }
 
 .gallery img:hover{
-    transform:scale(1.05);
+    transform:scale(1.03);
 }
 
-.reserva-box{
+.reserva-box,
+.login-box{
     max-width:500px;
     margin:auto;
     background:#1c1c1c;
@@ -152,7 +241,8 @@ body{
     border-radius:20px;
 }
 
-.reserva-box h2{
+.reserva-box h2,
+.login-box h2{
     text-align:center;
     margin-bottom:30px;
     color:#d4a373;
@@ -172,6 +262,7 @@ select{
     background:#2a2a2a;
     color:white;
     outline:none;
+    font-size:16px;
 }
 
 button{
@@ -182,6 +273,11 @@ button{
     color:black;
     font-weight:bold;
     cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
 }
 
 .login-section{
@@ -189,60 +285,116 @@ button{
 }
 
 .login-container{
-    display:flex;
-    justify-content:center;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 450px;
+    gap:60px;
     align-items:center;
-    gap:50px;
-    flex-wrap:wrap;
 }
 
 .login-info{
-    max-width:400px;
+    padding:20px;
 }
 
 .login-info h2{
-    font-size:45px;
+    font-size:55px;
     color:#d4a373;
     margin-bottom:20px;
 }
 
 .login-info p{
-    color:#ccc;
+    font-size:18px;
     line-height:1.8;
+    color:#ccc;
 }
 
 .login-box{
-    width:400px;
+    width:100%;
     background:#1c1c1c;
     padding:40px;
     border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.login-box h2{
+    text-align:center;
+    color:#d4a373;
+    margin-bottom:25px;
+}
+
+.login-box form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.login-box input{
+    width:100%;
+}
+
+.login-box button{
+    width:100%;
 }
 
 .separator{
     text-align:center;
     margin:20px 0;
-    color:#777;
+    color:#888;
+    position:relative;
+}
+
+.separator::before,
+.separator::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:40%;
+    height:1px;
+    background:#333;
+}
+
+.separator::before{
+    left:0;
+}
+
+.separator::after{
+    right:0;
 }
 
 .google-btn{
     width:100%;
+    background:#fff;
+    color:#111;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     gap:10px;
-    background:white;
-    color:black;
+    font-weight:600;
 }
 
 .google-btn img{
-    width:20px;
+    width:22px;
 }
 
-#mensaje{
-    margin-top:20px;
-    text-align:center;
-    color:#00ff88;
-    font-weight:bold;
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .login-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .login-info h2{
+        font-size:40px;
+    }
+
+    .login-box{
+        max-width:500px;
+        margin:auto;
+    }
+
 }
 
 #listaReservas{
@@ -252,18 +404,137 @@ button{
 
 .card-reserva{
     background:#1c1c1c;
-    padding:20px;
+    padding:25px;
     border-radius:20px;
+    transition:0.3s;
+}
+
+.card-reserva:hover{
+    transform:translateY(-5px);
+}
+
+.card-reserva h3{
+    color:#d4a373;
+    margin-bottom:10px;
+}
+
+.card-reserva p{
+    color:#ccc;
+    margin-bottom:10px;
 }
 
 .contacto{
     text-align:center;
-    line-height:2;
+    line-height:2.5;
+}
+
+.contacto p{
+    color:#ccc;
+    font-size:18px;
+}
+
+.chatbot-container{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    z-index:9999;
+}
+
+.chatbot-toggle{
+    width:65px;
+    height:65px;
+    background:#d4a373;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    cursor:pointer;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.chatbot-box{
+    width:350px;
+    height:500px;
+    background:#1c1c1c;
+    border-radius:20px;
+    overflow:hidden;
+    display:none;
+    flex-direction:column;
+    margin-bottom:15px;
+}
+
+.chat-header{
+    background:#d4a373;
+    color:black;
+    padding:18px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.chat-messages{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.bot-message,
+.user-message{
+    padding:12px;
+    border-radius:10px;
+    max-width:80%;
+}
+
+.bot-message{
+    background:#2a2a2a;
+    align-self:flex-start;
+}
+
+.user-message{
+    background:#d4a373;
+    color:black;
+    align-self:flex-end;
+}
+
+.chat-input{
+    display:flex;
+    border-top:1px solid #333;
+}
+
+.chat-input input{
+    flex:1;
+    border:none;
+    border-radius:0;
+}
+
+.chat-input button{
+    border-radius:0;
+}
+
+.whatsapp{
+    position:fixed;
+    bottom:100px;
+    right:20px;
+    width:65px;
+    height:65px;
+    background:#25d366;
+    border-radius:50%;
+    color:#FFF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    text-decoration:none;
+    z-index:9999;
+    box-shadow:0 5px 20px rgba(242, 242, 242, 0.5);
 }
 
 footer{
     background:#0d0d0d;
-    padding:60px 10% 20px;
+    padding:70px 10% 20px;
 }
 
 .footer-container{
@@ -281,7 +552,7 @@ footer{
 .footer-box p,
 .footer-box li{
     color:#ccc;
-    margin-bottom:10px;
+    margin-bottom:12px;
     list-style:none;
 }
 
@@ -293,30 +564,81 @@ footer{
     color:#777;
 }
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-.navbar{
-    flex-direction:column;
-    gap:15px;
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        background:#111;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero-content h1{
+        font-size:50px;
+    }
+
+    .hero-content p{
+        font-size:18px;
+    }
+
+    .section{
+        padding:80px 5%;
+    }
+
+    .login-info{
+        text-align:center;
+    }
+
+    .login-info h2{
+        font-size:38px;
+    }
+
+    .chatbot-box{
+        width:300px;
+    }
+
 }
 
-.hero-content h1{
-    font-size:45px;
+@media(max-width:600px){
+
+    .hero-content h1{
+        font-size:38px;
+    }
+
+    .section-title{
+        font-size:35px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
 }
 
-.section{
-    padding:80px 5%;
+#userInfo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
 }
 
-.login-info{
-    text-align:center;
+#userInfo img{
+    border-radius:50%;
 }
 
-.login-info h2{
-    font-size:35px;
-}
-
-.login-box{
-    width:100%;
-}
+#userInfo button{
+    padding:8px 12px;
+    font-size:14px;
 }
